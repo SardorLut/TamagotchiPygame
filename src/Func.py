@@ -3,8 +3,11 @@ import sys
 import pygame
 
 from src.Button import Button
+from src.Eating import Eating
+from src.Egg import Egg
 from src.Fun import Fun
 from src.Globals import Globals
+from src.Hygiene import Hygiene
 from src.Images import Images
 
 pygame.init()
@@ -42,12 +45,8 @@ def draw_border():
 
 
 def del_all():
-    Globals.eggs = []
     Globals.pets = []
-    Globals.breads = []
-    Globals.injections = []
     Globals.angels = []
-    Globals.balls = []
     Globals.objs = []
     Globals.HUNGER = 50
     Globals.FUN = 50
@@ -55,9 +54,6 @@ def del_all():
 
 
 def game(colour):
-    from src.Egg import Egg
-    from src.Eating import Eating
-    from src.Hygiene import Hygiene
     del_all()
     play = True
     Egg(colour, 250, 330)
@@ -70,7 +66,8 @@ def game(colour):
         Globals.window.fill(Globals.BG_COLOR)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                play = False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for icon in all_icons:
                     icon.update(event.pos)
@@ -78,25 +75,15 @@ def game(colour):
         eat.draw()
         hygiene.draw()
         fun.draw()
-        for egg in Globals.eggs:
-            egg.draw()
-        for pet in Globals.pets:
-            pet.draw()
-        for bread in Globals.breads:
-            bread.draw()
-        for injection in Globals.injections:
-            injection.draw()
-        for ball in Globals.balls:
-            ball.draw()
-        for angel in Globals.angels:
-            angel.draw()
+        for obj in Globals.objs:
+            obj.draw()
         for angel in Globals.angels:
             angel.update()
+        for pet in Globals.pets:
+            pet.draw()
         ui()
         pygame.display.update()
         clock.tick(Globals.FPS)
-
-    pygame.quit()
 
 
 def score_menu(stat):
@@ -136,7 +123,7 @@ def main_menu():
         Globals.window.fill(Globals.BG_COLOR)
         menu_mouse_pos = pygame.mouse.get_pos()
 
-        menu_text = get_font(30).render("MAIN MENU", True, "#ff0808")
+        menu_text = get_font(30).render("MAIN MENU", True, "#000000")
         menu_rect = menu_text.get_rect(center=(350, 30))
 
         play = Button(image=None, pos=(350, 100),

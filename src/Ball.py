@@ -1,11 +1,13 @@
-from src.Globals import Globals
 import pygame
+
+from src.Globals import Globals
 from src.Images import Images
+
+
 class Ball:
     def __init__(self, x, y):
         self.x, self.y = x, y
         self.frame = 0
-        Globals.balls.append(self)
         Globals.objs.append(self)
         self.stop = 60
         self.delay = 0
@@ -15,9 +17,9 @@ class Ball:
         self.delay += 1
         if self.delay == self.stop:
             Globals.objs.remove(self)
-            Globals.balls.remove(self)
+        speed_of_balloon = 9.5
         if self.delay <= self.stop / 2:
-            self.y -= 9.5
+            self.y -= speed_of_balloon
         else:
-            self.y += 9.5
+            self.y += speed_of_balloon
         Globals.window.blit(ball, (self.x, self.y))

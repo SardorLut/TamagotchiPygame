@@ -1,14 +1,16 @@
+from __future__ import annotations
 import pygame
 
 from src.Button import Button
 from src.DeathAngel import DeathAngel
-from src.Func import score_menu, get_font
+import src.Func
 from src.Globals import Globals
 from src.Images import Images
 
 
 class Pet:
     def __init__(self, colour, x, y):
+        self.score_menu, self.get_font = src.Func.score_menu, src.Func.get_font
         self.x, self.y = x, y
         self.colour = colour
         self.delay = 0
@@ -41,18 +43,18 @@ class Pet:
                 self.age_y += 1
             self.delay_age = 0
             if self.age_y == 18:
-                score_menu(1)
+                self.score_menu(1)
         else:
             self.delay_age += 1
-        Month = Button(image=None, pos=(600, 235), text_input="M>", font=get_font(20),
+        Month = Button(image=None, pos=(600, 235), text_input="M>", font=self.get_font(20),
                        base_color="#000000", hovering_color=None)
         M = str(self.age_m)
-        Month_num = Button(image=None, pos=(632, 235), text_input=M, font=get_font(20),
+        Month_num = Button(image=None, pos=(632, 235), text_input=M, font=self.get_font(20),
                            base_color="#000000", hovering_color=None)
         Y = str(self.age_y)
-        Year = Button(image=None, pos=(600, 210), text_input="Y>", font=get_font(20),
+        Year = Button(image=None, pos=(600, 210), text_input="Y>", font=self.get_font(20),
                       base_color="#000000", hovering_color=None)
-        Year_num = Button(image=None, pos=(632, 210), text_input=Y, font=get_font(20),
+        Year_num = Button(image=None, pos=(632, 210), text_input=Y, font=self.get_font(20),
                           base_color="#000000", hovering_color=None)
         for button in [Month, Year, Month_num, Year_num]:
             button.update(Globals.window)
