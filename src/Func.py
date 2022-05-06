@@ -19,6 +19,7 @@ def get_font(size):
 
 
 def ui():
+    """Пользовательский интерфейс"""
     bar = pygame.transform.scale(Images.BAR, (124, 24))
     bar_sht = pygame.transform.scale(Images.BAR_SHT, (11, 8))
     hygiene = Button(image=None, pos=(300, 20), text_input="HYGIENE", font=get_font(16),
@@ -40,11 +41,13 @@ def ui():
 
 
 def draw_border():
+    """Нарисовать экранчик для питомца"""
     border = pygame.transform.scale(Images.BORDER, (600, 700))
     Globals.window.blit(border, (0, -50))
 
 
 def del_all():
+    """Сбросить все"""
     Globals.pets = []
     Globals.angels = []
     Globals.objs = []
@@ -54,6 +57,7 @@ def del_all():
 
 
 def game(colour):
+    """Основной game loop"""
     del_all()
     play = True
     Egg(colour, 250, 330)
@@ -87,6 +91,7 @@ def game(colour):
 
 
 def score_menu(stat):
+    """Экран статистики"""
     while True:
         Globals.window.fill(Globals.BG_COLOR)
         menu_mouse_pos = pygame.mouse.get_pos()
@@ -102,7 +107,7 @@ def score_menu(stat):
                       text_input="BACK TO MENU", font=get_font(50), base_color="#030801", hovering_color="White")
         res.update(Globals.window)
         for button in [menu, quit_button]:
-            button.changeColor(menu_mouse_pos)
+            button.change_color(menu_mouse_pos)
             button.update(Globals.window)
 
         for event in pygame.event.get():
@@ -110,15 +115,16 @@ def score_menu(stat):
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if menu.checkForInput(menu_mouse_pos):
+                if menu.check_for_input(menu_mouse_pos):
                     main_menu()
-                if quit_button.checkForInput(menu_mouse_pos):
+                if quit_button.check_for_input(menu_mouse_pos):
                     pygame.quit()
                     sys.exit()
         pygame.display.update()
 
 
 def main_menu():
+    """Главное меню"""
     while True:
         Globals.window.fill(Globals.BG_COLOR)
         menu_mouse_pos = pygame.mouse.get_pos()
@@ -134,7 +140,7 @@ def main_menu():
         Globals.window.blit(menu_text, menu_rect)
 
         for button in [play, quit_button]:
-            button.changeColor(menu_mouse_pos)
+            button.change_color(menu_mouse_pos)
             button.update(Globals.window)
 
         for event in pygame.event.get():
@@ -142,15 +148,16 @@ def main_menu():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if play.checkForInput(menu_mouse_pos):
+                if play.check_for_input(menu_mouse_pos):
                     pet_menu()
-                if quit_button.checkForInput(menu_mouse_pos):
+                if quit_button.check_for_input(menu_mouse_pos):
                     pygame.quit()
                     sys.exit()
         pygame.display.update()
 
 
 def pet_menu():
+    """Экран выбора питомца"""
     while True:
         Globals.window.fill(Globals.BG_COLOR)
         menu_mouse_pos = pygame.mouse.get_pos()
@@ -162,7 +169,7 @@ def pet_menu():
         green_toma = Button(image=None, pos=(600, 250),
                             text_input="Lovelitchi", font=get_font(20), base_color="#030801", hovering_color="White")
         for button in [white_toma, blue_toma, green_toma]:
-            button.changeColor(menu_mouse_pos)
+            button.change_color(menu_mouse_pos)
             button.update(Globals.window)
         white = pygame.transform.scale(Images.WHITE_TOMA_IMAGE[2], (120, 150))
         Globals.window.blit(white, (40, 80))
@@ -177,10 +184,10 @@ def pet_menu():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if white_toma.checkForInput(menu_mouse_pos):
+                if white_toma.check_for_input(menu_mouse_pos):
                     game('white')
-                if blue_toma.checkForInput(menu_mouse_pos):
+                if blue_toma.check_for_input(menu_mouse_pos):
                     game('blue')
-                if green_toma.checkForInput(menu_mouse_pos):
+                if green_toma.check_for_input(menu_mouse_pos):
                     game('green')
         pygame.display.update()

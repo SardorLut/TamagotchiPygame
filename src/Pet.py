@@ -9,7 +9,9 @@ from src.Images import Images
 
 
 class Pet:
+    """Питомец, его состояние, изменение статуса и отрисовка на экране"""
     def __init__(self, colour, x, y):
+        """Инициализация питомца(статус, положение на экране)"""
         self.score_menu, self.get_font = src.Func.score_menu, src.Func.get_font
         self.x, self.y = x, y
         self.colour = colour
@@ -23,6 +25,7 @@ class Pet:
         Globals.pets.append(self)
 
     def __change_status(self):
+        """Через определенное менять состояние питомца"""
         if self.delay_status == Globals.FPS:
             Globals.HUNGER -= 1
             Globals.HYGIENE -= 1
@@ -36,6 +39,7 @@ class Pet:
             self.delay_status += 1
 
     def age(self):
+        """Изменяет возраст питомца через определенное время"""
         if self.delay_age == Globals.FPS / 2:
             self.age_m += 1
             if self.age_m == 12:
@@ -60,6 +64,7 @@ class Pet:
             button.update(Globals.window)
 
     def draw(self):
+        """Отрисовать питомца на экране"""
         self.age()
         if self.colour == 'white':
             TOMA = Images.WHITE_TOMA_IMAGE

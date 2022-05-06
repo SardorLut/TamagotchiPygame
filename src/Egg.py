@@ -6,7 +6,9 @@ from src.Pet import Pet
 
 
 class Egg:
+    """Яйцо, при исчезновении появиться питомец"""
     def __init__(self, colour, x, y):
+        """Инициализация яйца, положение и размер"""
         self.x, self.y = x, y
         self.colour = colour
         self.delay = 0
@@ -15,6 +17,7 @@ class Egg:
         self.stop = 120
 
     def draw(self):
+        """Отрисовать на экране яйцо, через определенное время родить питомца и удалить яйцо"""
         if self.delay != self.stop:
             if self.delay < self.stop / 6:
                 egg = pygame.transform.scale(Images.EGG_IMAGE[0], (self.size_of_egg, self.size_of_egg * 1.2))

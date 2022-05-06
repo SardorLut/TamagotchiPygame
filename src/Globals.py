@@ -2,7 +2,7 @@ import pygame
 
 
 class Globals:
-    # переменные
+    """Глобальные переменные и списки"""
     WIDTH, HEIGHT = 700, 600
     FPS = 30
     BG_COLOR = (180, 180, 10)

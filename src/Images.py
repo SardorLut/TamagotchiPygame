@@ -4,6 +4,7 @@ import pygame
 
 
 class Images:
+    """Все картинки которые используются в программе"""
     BORDER = pygame.image.load("assets/border.png").convert_alpha()
     WHITE_TOMA_IMAGE = [pygame.image.load(os.path.join('assets', 'toma_1.png')),
                         pygame.image.load(os.path.join('assets', 'toma_2.png')),
