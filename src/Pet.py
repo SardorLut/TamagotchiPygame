@@ -32,8 +32,8 @@ class Pet:
             Globals.FUN -= 1
             if Globals.HUNGER <= 0 or Globals.FUN <= 0 or Globals.HYGIENE <= 0:
                 if len(Globals.angels) == 0:
-                    DeathAngel(250, 100)
-                    DeathAngel(310, 100)
+                    DeathAngel(x=250, y=100)
+                    DeathAngel(x=310, y=100)
             self.delay_status = 0
         else:
             self.delay_status += 1
@@ -66,6 +66,7 @@ class Pet:
     def draw(self):
         """Отрисовать питомца на экране"""
         self.age()
+        width, height = 120, 150
         if self.colour == 'white':
             TOMA = Images.WHITE_TOMA_IMAGE
         elif self.colour == 'blue':
@@ -73,11 +74,11 @@ class Pet:
         else:
             TOMA = Images.GREEN_TOMA_IMAGE
         if self.delay < Globals.FPS / 2:
-            toma = pygame.transform.scale(TOMA[0], (120, 150))
+            toma = pygame.transform.scale(TOMA[0], (width, height))
             if TOMA != Images.WHITE_TOMA_IMAGE:
                 toma.set_colorkey('white')
         else:
-            toma = pygame.transform.scale(TOMA[1], (120, 150))
+            toma = pygame.transform.scale(TOMA[1], (width, height))
             if TOMA != Images.WHITE_TOMA_IMAGE:
                 toma.set_colorkey('white')
         self.delay += 1

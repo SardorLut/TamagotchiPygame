@@ -16,11 +16,14 @@ class Eating(pygame.sprite.Sprite):
     def update(self, mouse):
         """При нажатии на иконку еды, накормить питомца"""
         if self.rect.collidepoint(mouse) and len(Globals.objs) == 0:
-            Bread(350, 150)
-            if Globals.HUNGER + 10 >= 100:
-                Globals.HUNGER = 100
+            x, y = 350, 150
+            max = 100
+            get = 10
+            Bread(x, y)
+            if Globals.HUNGER + get >= max:
+                Globals.HUNGER = max
             else:
-                Globals.HUNGER += 10
+                Globals.HUNGER += get
 
     def draw(self):
         """Отрисовать иконку еды на экране"""

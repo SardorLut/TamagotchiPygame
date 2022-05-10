@@ -32,5 +32,6 @@ class Egg:
             Globals.window.blit(egg, (self.x, self.y))
             self.delay += 1
         else:
+            x, y = 250, 300
             Pet(self.colour, 250, 300)
             Globals.objs.remove(self)

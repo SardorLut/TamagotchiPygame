@@ -16,7 +16,8 @@ class Injection:
 
     def draw(self):
         """Отрисовать на экране укола"""
-        inject = pygame.transform.scale(Images.INJECT_IMAGE, (200, 30))
+        height, width = 200, 30
+        inject = pygame.transform.scale(Images.INJECT_IMAGE, (height, width))
         self.delay += 1
         if self.delay == self.stop:
             Globals.objs.remove(self)

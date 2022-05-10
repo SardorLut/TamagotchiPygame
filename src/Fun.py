@@ -17,11 +17,14 @@ class Fun(pygame.sprite.Sprite):
     def update(self, mouse):
         """При нажатии на иконку веселься, развеселить питомца"""
         if self.rect.collidepoint(mouse) and len(Globals.objs) == 0:
-            Ball(150, 410)
-            if Globals.FUN + 10 >= 100:
-                Globals.FUN = 100
+            x, y = 150, 410
+            max = 100
+            get = 10
+            Ball(x, y)
+            if Globals.FUN + get >= max:
+                Globals.FUN = max
             else:
-                Globals.FUN += 10
+                Globals.FUN += get
 
     def draw(self):
         """Отрисовать на экране иконку"""

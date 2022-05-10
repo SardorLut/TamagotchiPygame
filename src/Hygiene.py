@@ -16,11 +16,13 @@ class Hygiene(pygame.sprite.Sprite):
     def update(self, mouse):
         """При нажатии на иконку гигиены, сделать укол питомцу"""
         if self.rect.collidepoint(mouse) and len(Globals.objs) == 0:
-            Injection(77, 410)
-            if Globals.HYGIENE + 10 >= 100:
-                Globals.HYGIENE = 100
+            Injection(x=77, y=410)
+            max = 100
+            get = 10
+            if Globals.HYGIENE + get >= max:
+                Globals.HYGIENE = max
             else:
-                Globals.HYGIENE += 10
+                Globals.HYGIENE += get
 
     def draw(self):
         """Отрисовать на экране иконку"""

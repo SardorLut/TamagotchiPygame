@@ -10,7 +10,6 @@
 
     git clone https://github.com/SardorLut/TamagotchiPygame.git
     cd  TamagotchiPygame
-    git checkout dev
     pip install -r requirements.txt
     python3 main.py
 </table>

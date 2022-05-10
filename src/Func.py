@@ -20,30 +20,44 @@ def get_font(size):
 
 def ui():
     """Пользовательский интерфейс"""
-    bar = pygame.transform.scale(Images.BAR, (124, 24))
-    bar_sht = pygame.transform.scale(Images.BAR_SHT, (11, 8))
-    hygiene = Button(image=None, pos=(300, 20), text_input="HYGIENE", font=get_font(16),
+    x_bar, y_bar = 124, 24
+    bar_sht_size_x, bar_sht_size_y = 11, 8
+    bar = pygame.transform.scale(Images.BAR, (x_bar, y_bar))
+    bar_sht = pygame.transform.scale(Images.BAR_SHT, (bar_sht_size_x, bar_sht_size_y))
+    hygiene_x, hygiene_y = 300, 20
+    hunger_x, hunger_y = 120, 20
+    fun_x, fun_y = 480, 20
+    hygiene = Button(image=None, pos=(hygiene_x, hygiene_y), text_input="HYGIENE", font=get_font(16),
                      base_color="#000000", hovering_color=None)
-    hunger = Button(image=None, pos=(120, 20), text_input="HUNGER", font=get_font(16),
+    hunger = Button(image=None, pos=(hunger_x, hunger_y), text_input="HUNGER", font=get_font(16),
                     base_color="#000000", hovering_color=None)
-    fun = Button(image=None, pos=(480, 20), text_input="FUN", font=get_font(16),
+    fun = Button(image=None, pos=(fun_x, fun_y), text_input="FUN", font=get_font(16),
                  base_color="#000000", hovering_color=None)
     for i in range(3):
-        Globals.window.blit(bar, (56 + 180 * i, 40))
+        x = 56 + 180 * i
+        y = 40
+        Globals.window.blit(bar, (x, y))
     for i in range(int(Globals.HUNGER / 10)):
-        Globals.window.blit(bar_sht, (62 + 11 * i, 48))
+        x = 62 + 11 * i
+        y = 48
+        Globals.window.blit(bar_sht, (x, y))
     for i in range(int(Globals.HYGIENE / 10)):
-        Globals.window.blit(bar_sht, (242 + 11 * i, 48))
+        x = 242 + 11 * i
+        y = 48
+        Globals.window.blit(bar_sht, (x, y))
     for i in range(int(Globals.FUN / 10)):
-        Globals.window.blit(bar_sht, (422 + 11 * i, 48))
+        x = 422 + 11 * i
+        y = 48
+        Globals.window.blit(bar_sht, (x, y))
     for button in [hunger, hygiene, fun]:
         button.update(Globals.window)
 
 
 def draw_border():
     """Нарисовать экранчик для питомца"""
-    border = pygame.transform.scale(Images.BORDER, (600, 700))
-    Globals.window.blit(border, (0, -50))
+    x, y = 0, -50
+    border = pygame.transform.scale(Images.BORDER, (Globals.HEIGHT, Globals.WIDTH))
+    Globals.window.blit(border, (x, y))
 
 
 def del_all():
@@ -60,10 +74,10 @@ def game(colour):
     """Основной game loop"""
     del_all()
     play = True
-    Egg(colour, 250, 330)
-    eat = Eating(80, 530)
-    hygiene = Hygiene(250, 530)
-    fun = Fun(410, 530)
+    Egg(colour, x=250, y=330)
+    eat = Eating(x=80, y=530)
+    hygiene = Hygiene(x=250, y=530)
+    fun = Fun(x=410, y=530)
     all_icons = pygame.sprite.Group()
     all_icons.add(eat, hygiene, fun)
     while play:
@@ -171,14 +185,18 @@ def pet_menu():
         for button in [white_toma, blue_toma, green_toma]:
             button.change_color(menu_mouse_pos)
             button.update(Globals.window)
-        white = pygame.transform.scale(Images.WHITE_TOMA_IMAGE[2], (120, 150))
-        Globals.window.blit(white, (40, 80))
-        blue = pygame.transform.scale(Images.BLUE_TOMA_IMAGE[2], (120, 150))
+        height, width = 120, 150
+        x_1, y_1 = 40, 80
+        x_2, y_2 = 280, 80
+        x_3, y_3 = 520, 80
+        white = pygame.transform.scale(Images.WHITE_TOMA_IMAGE[2], (height, width))
+        Globals.window.blit(white, (x_1, y_1))
+        blue = pygame.transform.scale(Images.BLUE_TOMA_IMAGE[2], (height, width))
         blue.set_colorkey('white')
-        Globals.window.blit(blue, (280, 80))
-        green = pygame.transform.scale(Images.GREEN_TOMA_IMAGE[2], (120, 150))
+        Globals.window.blit(blue, (x_2, y_2))
+        green = pygame.transform.scale(Images.GREEN_TOMA_IMAGE[2], (height, width))
         green.set_colorkey('white')
-        Globals.window.blit(green, (520, 80))
+        Globals.window.blit(green, (x_3, y_3))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
